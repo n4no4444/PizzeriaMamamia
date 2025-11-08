@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Mamma Mia</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (para íconos) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Estilos base del proyecto -->
+    <link rel="stylesheet" href="MAINSTYLE.css">
+
+    <!-- Estilos específicos del panel -->
+    <style>
+        :root{
+            --mm-green: #5f8d37;
+            --mm-green-700:#3f6423;
+            --mm-cream:#FFF1D7;
+            --mm-accent:#bb3e00;
+            --mm-gray:#f5f6f8;
+        }
+        body{ background: var(--mm-gray); }
+        .sidebar{
+            width: 260px; min-height: 100vh;
+            background: #111827; /* gris muy oscuro */
+            color:#cbd5e1;        /* slate-300 */
+            position: sticky; top:0;
+        }
+        .sidebar .brand{
+            color: var(--mm-cream); text-decoration:none;
+            font-weight: 800;
+        }
+        .sidebar .nav-link{
+            color:#cbd5e1; border-radius: .5rem; font-weight:600;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active{
+            background:#1f2937; color:#fff;
+        }
+        .btn-mm{ background: var(--mm-green); color:#fff; border-color:var(--mm-green); }
+        .btn-mm:hover{ background: #4f792e; color:#fff; }
+        .mm-card{
+            border:0; border-radius: 1rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,.08);
+            background:#fff;
+        }
+        .stat{
+            border:0; border-radius: 1rem; color:#fff;
+            box-shadow: 0 8px 18px rgba(0,0,0,.12);
+        }
+        .stat-blue{ background:#2563eb; }
+        .stat-green{ background:#16a34a; }
+        .stat-yellow{ background:#d97706; }
+        .badge-soft{ background: rgba(255,255,255,.15); }
+        .topbar{
+            background: var(--mm-cream);
+            border-bottom: 1px solid rgba(0,0,0,.06);
+        }
+        /* Responsive: sidebar se vuelve offcanvas en < lg */
+        @media (max-width: 991.98px){
+            .sidebar{ position: fixed; z-index: 1050; left:0; top:0; height:100vh; }
+            .content{ margin-left:0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra superior -->
+<nav class="topbar navbar navbar-expand-lg">
+    <div class="container-fluid px-3">
+        <button class="btn btn-outline-secondary d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#offSidebar">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <a href="index.html" class="navbar-brand ms-2 fw-bold text-success">Mamma Mia · Admin</a>
+
+        <div class="ms-auto d-flex align-items-center gap-2">
+            <a href="index.html" class="btn btn-outline-success">Tienda</a>
+            <button id="btnSalir" class="btn btn-outline-danger">Cerrar Sesión</button>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex">
+    <!-- Sidebar escritorio -->
+    <aside class="sidebar d-none d-lg-flex flex-column p-3">
+        <a href="index.html" class="brand d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-pizza"></i> Mamma Mia
+        </a>
+        <hr class="border-secondary">
+        <ul class="nav nav-pills flex-column gap-1">
+            <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pedidos"><i class="bi bi-bag-check me-2"></i>Órdenes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#productos"><i class="bi bi-box-seam me-2"></i>Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#categorias"><i class="bi bi-grid me-2"></i>Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="#usuarios"><i class="bi bi-people me-2"></i>Usuarios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#reportes"><i class="bi bi-bar-chart-line me-2"></i>Reportes</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-shop me-2"></i>Tienda</a></li>
+        </ul>
+        <div class="mt-auto small text-secondary">
+            <hr class="border-secondary">
+            <div>© 2025 Mamma Mia</div>
+        </div>
+    </aside>
+
+    <!-- Sidebar móvil (offcanvas) -->
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Mamma Mia · Admin</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-pills flex-column gap-1">
+                <li class="nav-item"><a class="nav-link active" data-bs-dismiss="offcanvas" href="#"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#pedidos"><i class="bi bi-bag-check me-2"></i>Órdenes</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#productos"><i class="bi bi-box-seam me-2"></i>Productos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#categorias"><i class="bi bi-grid me-2"></i>Categorías</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#usuarios"><i class="bi bi-people me-2"></i>Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#reportes"><i class="bi bi-bar-chart-line me-2"></i>Reportes</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="index.html"><i class="bi bi-shop me-2"></i>Tienda</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contenido -->
+    <main class="content flex-grow-1 p-3 p-lg-4" style="margin-left:260px;">
+        <!-- Encabezado -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+            <div>
+                <h1 class="h4 mb-0">Dashboard</h1>
+                <div class="text-secondary small">Resumen de las actividades diarias</div>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="CARTA.html" class="btn btn-mm"><i class="bi bi-plus-lg me-1"></i>Nuevo producto</a>
+                <a href="#reportes" class="btn btn-outline-secondary"><i class="bi bi-download me-1"></i>Exportar</a>
+            </div>
+        </div>
+
+        <!-- Tarjetas de métricas -->
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-md-4">
+                <div class="stat stat-blue p-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="small opacity-75">Compras</div>
+                            <div class="fs-3 fw-bold">1,234</div>
+                            <span class="badge badge-soft">Probabilidad de aumento: 20%</span>
+                        </div>
+                        <i class="bi bi-cart fs-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="stat stat-green p-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="small opacity-75">Productos</div>
+                            <div class="fs-3 fw-bold">400</div>
+                            <span class="badge badge-soft">Inventario actual: 500</span>
+                        </div>
+                        <i class="bi bi-box-seam fs-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="stat stat-yellow p-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="small opacity-75">Usuarios</div>
+                            <div class="fs-3 fw-bold">890</div>
+                            <span class="badge badge-soft">Nuevos este mes: 120</span>
+                        </div>
+                        <i class="bi bi-people fs-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accesos rápidos -->
+        <div class="row g-3">
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-primary"><i class="bi bi-speedometer2"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Dashboard</div>
+                                <div class="text-secondary small">Métricas generales del sistema.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#pedidos" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-success"><i class="bi bi-bag-check"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Órdenes</div>
+                                <div class="text-secondary small">Gestión y seguimiento de compras.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#productos" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-warning"><i class="bi bi-box-seam"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Productos</div>
+                                <div class="text-secondary small">Inventario y detalles.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#categorias" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-info"><i class="bi bi-grid"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Categorías</div>
+                                <div class="text-secondary small">Organiza los productos.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#usuarios" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-danger"><i class="bi bi-people"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Usuarios</div>
+                                <div class="text-secondary small">Cuentas y roles.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="#reportes" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-secondary"><i class="bi bi-bar-chart-line"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Reportes</div>
+                                <div class="text-secondary small">Informes detallados.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="perfil.html" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2" style="color:var(--mm-accent);"><i class="bi bi-person-gear"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Perfil</div>
+                                <div class="text-secondary small">Información y configuración.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+                <a href="index.html" class="text-decoration-none">
+                    <div class="mm-card p-3 h-100">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fs-2 text-success"><i class="bi bi-shop"></i></div>
+                            <div>
+                                <div class="fw-bold text-dark">Tienda</div>
+                                <div class="text-secondary small">Vista pública del sitio.</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Secciones ancla (para enlazar desde el sidebar) -->
+        <section id="pedidos" class="mt-5">
+            <h2 class="h5 mb-3">Órdenes</h2>
+            <div class="mm-card p-3">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm align-middle">
+                        <thead><tr><th>ID</th><th>Cliente</th><th>Estado</th><th>Dirección</th><th>Total</th><th>Acciones</th></tr></thead>
+                        <tbody>
+                        <tr><td>1001</td><td>Ana López</td><td><span class="badge text-bg-warning">Pendiente</span></td><td>Av. Norte 123</td><td>$12.990</td><td><button class="btn btn-sm btn-outline-secondary">Ver</button></td></tr>
+                        <tr><td>1002</td><td>Carlos Pérez</td><td><span class="badge text-bg-success">Entregado</span></td><td>Los Olmos 456</td><td>$15.990</td><td><button class="btn btn-sm btn-outline-secondary">Ver</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="productos" class="mt-5">
+            <h2 class="h5 mb-3">Productos</h2>
+            <div class="mm-card p-3">
+                <p class="text-secondary mb-0">Aquí puedes administrar tu inventario (crear/editar/eliminar).</p>
+            </div>
+        </section>
+
+        <section id="categorias" class="mt-5">
+            <h2 class="h5 mb-3">Categorías</h2>
+            <div class="mm-card p-3">
+                <p class="text-secondary mb-0">Organiza tus productos por categorías y subcategorías.</p>
+            </div>
+        </section>
+
+        <section id="usuarios" class="mt-5">
+            <h2 class="h5 mb-3">Usuarios</h2>
+            <div class="mm-card p-3">
+                <p class="text-secondary mb-0">Gestión de cuentas, roles y permisos.</p>
+            </div>
+        </section>
+
+        <section id="reportes" class="mt-5">
+            <h2 class="h5 mb-3">Reportes</h2>
+            <div class="mm-card p-3">
+                <p class="text-secondary mb-0">Genera informes y descarga reportes en CSV/PDF.</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Lógica simple: botón salir -->
+<script>
+    document.getElementById('btnSalir')?.addEventListener('click', () => {
+        try {
+            localStorage.removeItem('session');
+            localStorage.removeItem('role');
+        } catch(e){}
+        window.location.href = 'ingresar.html';
+    });
+</script>
+</body>
+</html>

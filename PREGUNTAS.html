@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="MAINSTYLE.css">
+
+    <title>Preguntas Frecuentes | Mamma Mia</title>
+</head>
+<body class="bg-cream">
+
+<!--naAVBAR / OFFCANVAS -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-green-700 sticky-top shadow-sm" id="principal">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-cream" href="main.html">“SIN LLAMAR, SIN ESPERAR”</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Abrir menú">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Hola, Usuario 👋</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="main.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CARTA.html">Carta</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="PREGUNTAS.html">Preguntas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link" href="historial.html">Historial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ingresar.html">Login / Configuración</a></li>
+                    <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- =======================================================
+     LOGO / TÍTULO
+     ======================================================= -->
+<header class="py-4">
+    <div class="container d-flex flex-column align-items-center">
+        <img src="img/PlaceHolderLogo.png" alt="Logo Mamma Mia" width="120" height="120" class="rounded-circle border mb-2">
+        <h1 class="h4 text-green-800 fw-bold mb-0">Preguntas Frecuentes</h1>
+    </div>
+</header>
+
+<main>
+    <!-- =====================================================
+         FAQ con acordeón
+         ===================================================== -->
+    <section id="faq" class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="accordion accordion-flush" id="accordionFaq">
+
+                            <!-- Pregunta 1 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="q1">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#a1"
+                                            aria-expanded="false" aria-controls="a1">
+                                        ¿Cuánto demora el despacho?
+                                    </button>
+                                </h2>
+                                <div id="a1" class="accordion-collapse collapse" aria-labelledby="q1" data-bs-parent="#accordionFaq">
+                                    <div class="accordion-body">
+                                        Nuestro tiempo promedio es de <strong>25–45 minutos</strong> según tu zona y demanda.
+                                        Puedes revisar el estado en <em>Carrito → Seguimiento</em>.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pregunta 2 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="q2">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#a2"
+                                            aria-expanded="false" aria-controls="a2">
+                                        ¿Qué medios de pago aceptan?
+                                    </button>
+                                </h2>
+                                <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#accordionFaq">
+                                    <div class="accordion-body">
+                                        Aceptamos <strong>tarjetas débito/crédito</strong>, transferencias
+                                        y pagos digitales. Las promociones se aplican automáticamente en el checkout.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pregunta 3 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="q3">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#a3"
+                                            aria-expanded="false" aria-controls="a3">
+                                        ¿Puedo personalizar mi pizza?
+                                    </button>
+                                </h2>
+                                <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#accordionFaq">
+                                    <div class="accordion-body">
+                                        Sí, puedes agregar o quitar ingredientes desde la sección <strong>Carta</strong>
+                                        antes de añadir al carrito. Los cambios afectan el precio final.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pregunta 4 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="q4">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#a4"
+                                            aria-expanded="false" aria-controls="a4">
+                                        ¿Hacen envíos a todo Santiago?
+                                    </button>
+                                </h2>
+                                <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#accordionFaq">
+                                    <div class="accordion-body">
+                                        Cubrimos <strong>zonas seleccionadas</strong>. En el mapa de la página principal
+                                        puedes verificar si tu dirección está dentro del radio de cobertura.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /accordion -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+<footer class="bg-green-800 text-cream py-4">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <h5 class="fw-bold">“Sin llamar, sin esperar”</h5>
+                <p class="mb-0">PIZZAS MAMMA MIA ©2025 — Todos los derechos reservados.</p>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="fw-bold">Sobre nosotros</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="#" class="link-cream">Nuestra meta</a></li>
+                    <li><a href="#" class="link-cream">Políticas</a></li>
+                    <li><a href="#" class="link-cream">Términos y condiciones</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="fw-bold">Equipo</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="#" class="link-cream">Únete</a></li>
+                    <li><a href="#" class="link-cream">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="fw-bold">Redes</h6>
+                <ul class="list-unstyled small">
+                    <li><a href="#" class="link-cream">Instagram</a></li>
+                    <li><a href="#" class="link-cream">Facebook</a></li>
+                    <li><a href="#" class="link-cream">X (Twitter)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
